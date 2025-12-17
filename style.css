@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0b1e;
+    min-height: 100vh; /* Gunakan min-height agar bisa memanjang */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* Hanya sembunyikan scroll horizontal */
+    position: relative;
+    padding: 20px;
+}
+
+/* Animasi Background */
+.bg-animate {
+    position: fixed; /* Ubah ke fixed agar tidak ikut tergulung */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    filter: blur(80px);
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    animation: move 20s infinite alternate;
+}
+.circle:nth-child(1) { width: 400px; height: 400px; background: #1e3c72; top: -10%; left: -10%; }
+.circle:nth-child(2) { width: 300px; height: 300px; background: #ff4757; bottom: 10%; right: 10%; animation-delay: -5s; }
+.circle:nth-child(3) { width: 250px; height: 250px; background: #1a73e8; top: 40%; left: 50%; animation-delay: -10s; }
+
+@keyframes move {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(100px, 100px) scale(1.2); }
+}
+
+.main-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Batasi lebar maksimal */
+}
+
+/* Kotak dengan Border Glow Berputar */
+.glow-border {
+    position: relative;
+    width: 100%;
+    padding: 3px;
+    border-radius: 25px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.glow-border::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, #00d2ff, #3a7bd5, #00d2ff);
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+.card {
+    position: relative;
+    background: rgba(15, 15, 35, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    border-radius: 22px;
+    width: 100%;
+    color: white;
+    z-index: 1;
+}
+
+h2 { 
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 1.2rem; 
+    text-align: center;
+    margin-bottom: 10px;
+    color: #00d2ff;
+    letter-spacing: 1px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #00d2ff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+#result-area {
+    margin-top: 25px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Desain Item Langkah */
+.step-item {
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    border-left: 4px solid #00d2ff;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+#result-area::-webkit-scrollbar { width: 4px; }
+#result-area::-webkit-scrollbar-thumb { background: #00d2ff; border-radius: 10px; }
+
+#cursor-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
